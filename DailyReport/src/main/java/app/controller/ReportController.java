@@ -16,7 +16,7 @@ public class ReportController {
 	
 	@RequestMapping(value = "/")
 	public ModelAndView index() {
-		logger.info("home page");
+		logger.info("Home page");
 		ModelAndView model = new ModelAndView("views/dailyreport/index");
 		return model;
 	}
