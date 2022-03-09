@@ -24,3 +24,5 @@ hs_err_pid*
 DailyReport/.classpath
 DailyReport/target
 DailyReport/src/main/resources/datasources.properties
+
+.env
