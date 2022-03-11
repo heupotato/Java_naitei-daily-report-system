@@ -1,0 +1,15 @@
+.login-form{
+	border-color: black;
+	border: 1px solid black;
+	padding: 50px; 
+	background-color: white;
+	max-width: 30vw; 
+	margin: auto;
+
+	
+}
+
+.body-login{
+	background-color: silver;
+	position: relative;
+}

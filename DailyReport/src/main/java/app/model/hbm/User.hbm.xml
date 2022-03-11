@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="app.model">
+	<class name="User" table="user">
+		<id name="id" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="username" type="string">
+			<column name="username" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" />
+		</property>
+		<property name="phone" type="string">
+			<column name="phone" />
+		</property>
+		<property name="fullname" type="string">
+			<column name="fullname" />
+		</property>
+		<property name="role" type="int">
+			<column name="role" />
+		</property>
+		<property name="isDeleted" type="integer">
+			<column name="isDeleted" default="1" />
+		</property>
+		<property name="division_id" type="int">
+			<column name="division_id" />
+		</property>
+	</class>
+</hibernate-mapping>

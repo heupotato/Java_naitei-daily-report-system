@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Login page</title>
+	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/assets/css/layout.css}" />
+	<link rel="stylesheet" th:href="@{/assets/css/login.css}" />
+</head>
+<body class="body-login">
+	<form th:action="@{/login}" method="post" modelAttribute="loginBean" class="login-form">
+		<span style="color: red" th:text="${message}"></span>
+		<h1>Login</h1>
+	    <p>
+	        E-mail: <input type="email" name="username" required />  
+	    </p>
+	    <p>
+	        Password: <input type="password" name="password" required />
+	    </p>
+	    <p>
+	        <input type="submit" value="Login" />
+	    </p>
+	</form>
+	
+</body>
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+</html>
