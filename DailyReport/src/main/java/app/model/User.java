@@ -1,11 +1,24 @@
 package app.model;
+import java.beans.Transient;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.validation.constraints.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 public class User{
 	private Integer id; 
+	
+	@NotNull(message = "{NotEmpty.user.name}")
 	private String username; 
+	@NotNull(message = "{NotEmpty.password}")
 	private String password; 
 	private String fullname; 
 	private String phone; 
-	private Integer role; 
+	private Integer role ; 
 	private Integer isDeleted; 
 	private Integer division_id; 
 	
@@ -18,7 +31,13 @@ public class User{
 		this.password = password; 
 	}
 	
-	public User(Integer id, String username, String password, String fullname, String phone, int role, int division_id) {
+	public User(String username, String password, int role) {
+		this.username = username; 
+		this.password = password; 
+		this.role = role; 
+	}
+	
+	public User(Integer id, String username, String password, String fullname, String phone, int role, int isDeleted, int division_id) {
 		this.id = id; 
 		this.username = username; 
 		this.password = password; 
@@ -84,9 +103,7 @@ public class User{
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	
-	
-	
+		
 	public Integer getDivision_id() {
 		return division_id;
 	}
@@ -97,5 +114,20 @@ public class User{
 
 	public void display() {
 		System.out.println("User Info: \n" + "username: " + username + " - password: " + password);  
+	}
+
+	public String getRoleString() {
+		if (this.role == 1) {
+			return "ADMIN";
+		} else {
+			return "USER";
+		}
+	}
+
+	@Transient
+	public List<GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(this.getRoleString()));
+		return authorities;
 	}
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -20,7 +22,8 @@
 }
 
 .navbar-brand{
-	color: white !important
+	color: white !important;
+	font-family: 'Montserrat', sans-serif;
 }
 .navbar-nav{
 	margin: 7.5px -15px !important;
@@ -34,6 +37,7 @@
     padding: 0;
     list-style: none;
     font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .sidebar-nav li {
@@ -71,4 +75,11 @@
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+.dropdown{
+	font-family: 'Montserrat', sans-serif;
+}
+
+body{
+	font-family: 'Montserrat', sans-serif;
 }

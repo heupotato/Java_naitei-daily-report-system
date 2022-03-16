@@ -1,6 +1,9 @@
 package app.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.NoResultException;
 
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -23,8 +26,13 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	@Override
 	public User findByUsername(String username) {
 		logger.info("username: " + username);
-		return (User) getSession().createQuery("FROM user where username = ?").setParameter(0, username)
-				.getSingleResult();
+		try {
+			return (User) getSession().createQuery("from User where username = :username").setParameter("username", username)
+					.getSingleResult();
+		} catch (NoResultException nre) {
+			return null; 
+		}
+	
 	}
 
 	

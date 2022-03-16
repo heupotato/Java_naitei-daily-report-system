@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Login</title>
+	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/assets/css/login.css}" />
+</head>
+<body>
+	
+	<div class="container" id="container">
+	
+	
+	<div class="form-container sign-in-container">
+		<form th:action="@{/j_spring_security_login}" method="post">
+			<div th:if="${msg != null}" class="alert alert-dismissible "
+				th:class="${css == 'error' ? 'alert-danger' : 'alert-success'} + ' alert text-center'"
+				role="alert">
+				<strong><span th:text="${msg}"></span></strong>
+			</div>
+			
+			<h1>Sign in</h1>
+			<input type="email" name="username" placeholder="Username" />
+			<input type="password" name= "password" placeholder="Password" />
+			<a href="#">Forgot your password?</a>
+			<button type="submit">Sign In</button>
+		</form>
+	</div>
+	
+	</div>
+</body>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+</html>
