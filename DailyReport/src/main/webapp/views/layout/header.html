@@ -7,8 +7,10 @@
 			
 			
 			<div id="navbar" class="dropdown nav navbar-nav navbar-right">
-				<div class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Your username
-				<span class="caret"></span></div>
+				<div class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					<span th:text=" 'Hello ' +  ${currentUser}"></span>
+					<span class="caret"></span>
+				</div>
 				<ul class="dropdown-menu">
 				  <li><a href="#">Profile</a></li>
 				  <li><a href="#">Report List</a></li>

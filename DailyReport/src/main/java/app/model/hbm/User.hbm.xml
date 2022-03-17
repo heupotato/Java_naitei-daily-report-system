@@ -13,6 +13,20 @@
 		<property name="password" type="string">
 			<column name="password" />
 		</property>
-
+		<property name="phone" type="string">
+			<column name="phone" />
+		</property>
+		<property name="fullname" type="string">
+			<column name="fullname" />
+		</property>
+		<property name="role" type="int">
+			<column name="role" default="0"/>
+		</property>
+		<property name="isDeleted" type="int">
+			<column name="isDeleted" default="0" />
+		</property>
+		<property name="division_id" type="int">
+			<column name="division_id" />
+		</property>
 	</class>
 </hibernate-mapping>
