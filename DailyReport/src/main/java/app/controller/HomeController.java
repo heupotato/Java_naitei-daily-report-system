@@ -43,6 +43,7 @@ public class HomeController {
 		if (!(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
 			model.addObject("currentUser", auth.getName());
 		}
+		else return new ModelAndView("redirect:/login");
 
 		model.addObject("abc", userService.loadUsers());
 		return model;
@@ -55,6 +56,13 @@ public class HomeController {
 			model.addAttribute("css", "error");
 			model.addAttribute("msg", messageSource.getMessage("login.fail", null, Locale.US));
 		}
+		return "/views/users/login";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(final Model model) {
+		logger.info("login page");
+		model.addAttribute("msg", messageSource.getMessage("logout.success", null, Locale.US));
 		return "/views/users/login";
 	}
 
