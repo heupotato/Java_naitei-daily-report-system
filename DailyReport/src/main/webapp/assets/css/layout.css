@@ -83,3 +83,20 @@
 body{
 	font-family: 'Montserrat', sans-serif;
 }
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: black !important;
+    text-indent: 20px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.btn-link:hover{
+	text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
