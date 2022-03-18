@@ -2,15 +2,15 @@ package app.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import app.dao.StudentDAO;
+import app.dao.ReportDAO;
 import app.dao.UserDAO;
 
 public class BaseServiceImpl {
-//	@Autowired
-//	protected StudentDAO studentDAO;
 
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private ReportDAO reportDAO; 
 
 	public UserDAO getUserDAO() {
 		return userDAO;
@@ -20,11 +20,11 @@ public class BaseServiceImpl {
 		this.userDAO = userDAO;
 	}
 
-//	public StudentDAO getStudentDAO() {
-//		return studentDAO;
-//	}
-//
-//	public void setStudentDAO(StudentDAO studentDAO) {
-//		this.studentDAO = studentDAO;
-//	}
+	public ReportDAO getReportDAO() {
+		return reportDAO;
+	}
+
+	public void setReportDAO(ReportDAO reportDAO) {
+		this.reportDAO = reportDAO;
+	}
 }

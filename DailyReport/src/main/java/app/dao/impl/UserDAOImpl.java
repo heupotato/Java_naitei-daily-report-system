@@ -1,7 +1,6 @@
 package app.dao.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.NoResultException;
 

@@ -44,6 +44,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>app/model/hbm/User.hbm.xml</value>
+				<value>app/model/hbm/Report.hbm.xml</value>
 			</list>
 		</property>
 		<!-- load package
