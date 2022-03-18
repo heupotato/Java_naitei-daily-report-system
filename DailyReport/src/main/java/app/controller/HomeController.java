@@ -22,17 +22,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import app.model.User;
+import app.service.ReportService;
 import app.service.UserService;
 
 @Controller
-public class HomeController {
+public class HomeController extends BaseController{
 	private static final Logger logger = Logger.getLogger(HomeController.class);
-
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private MessageSource messageSource;
 
 	@RequestMapping(value = "/")
 	public ModelAndView index() {
@@ -40,12 +35,10 @@ public class HomeController {
 		ModelAndView model = new ModelAndView("views/dailyreport/index");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		if (!(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
+		if (checkAuth(auth)) {
 			model.addObject("currentUser", auth.getName());
 		}
 		else return new ModelAndView("redirect:/login");
-
-		model.addObject("abc", userService.loadUsers());
 		return model;
 	}
 	

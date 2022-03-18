@@ -1,0 +1,21 @@
+.title{
+	margin-top: 20px; 
+	text-align: center; 
+	font-weight: bold;
+}
+
+.no-report{
+	font-size: 20px; 
+	margin-top: 30px; 
+	text-align: center;
+}
+
+.report-card{
+	font-size: 16px; 
+}
+.report-card pre{
+	font-size: 16px !important; 
+}
+.report-card pre, input, label, a {
+	margin-bottom: 15px !important;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="app.model">
+	<class name="Report" table="report_tbl">
+		<id name="id" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="user_id" type="int">
+			<column name="user_id" />
+		</property>
+		<property name="isDraft" type="int">
+			<column name="isDraft" />
+		</property>
+		<property name="isDeleted" type="int">
+			<column name="isDeleted" />
+		</property>
+		<property name="isApproved" type="int">
+			<column name="isApproved" />
+		</property>
+		<property name="createdAt" type="date">
+			<column name="createdAt" />
+		</property>
+		<property name="approveAt" type="date">
+			<column name="approveAt" />
+		</property>
+		<property name="lastUpdatedAt" type="date">
+			<column name="lastUpdatedAt" />
+		</property>
+		<property name="acture" type="text">
+			<column name="acture" />
+		</property>
+		<property name="plan" type="text">
+			<column name="plan" />
+		</property>
+		<property name="issue" type="text">
+			<column name="issue" />
+		</property>
+	</class>
+</hibernate-mapping>
