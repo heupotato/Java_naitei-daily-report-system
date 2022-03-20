@@ -30,7 +30,8 @@ public class ReportDAOImpl extends GenericDAO<Integer, Report> implements Report
 	@Override
 	public List<Report> loadReports(String username) {
 		int user_id = userService.findByUsername(username).getId(); 
-		return getSession().createQuery("from Report where user_id = :user_id").setParameter("user_id", user_id)
+		return getSession().createQuery("from Report where user_id = :user_id and isDeleted = 0 order by createdAt DESC")
+				.setParameter("user_id", user_id)
 				.getResultList(); 
 				
 	}

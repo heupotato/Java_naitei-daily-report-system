@@ -13,7 +13,8 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 		// Get the role of logged in user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toString();
-
+		
+		request.getSession().setAttribute("currentUser", auth.getName());
 		String targetUrl = "";
 		if (role.contains("ADMIN")) {
 			targetUrl = "/admin/users/"; 

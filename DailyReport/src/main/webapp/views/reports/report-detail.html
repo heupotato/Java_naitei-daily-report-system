@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="views/layout/base-layout">
+<head>
+	<title>Report Detail</title>
+	<link rel="stylesheet" th:href="@{/assets/css/report.css}" />
+	<link rel="stylesheet" th:href="@{/assets/css/common.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	
+</head>
+<div layout:fragment="body" class="container">
+	<h1 class= "title">Report Detail</h1>
+	<div th:if="${error}">
+		<p class="report-error" th:text="${error}"></p>
+	</div>
+	
+	<div class= "report-content">
+		<div class= "report-date"  style="clear: both;">
+			<div class= "alignleft">
+				<div class="blank2x"></div>
+				<i class="fas fa-calendar-plus"></i> 
+				<div class="tab"></div>
+				<span th:text="'Created on ' + ${report.createdAt}"></span>
+			</div>
+			
+			<div class= "alignright">
+				<i class="fas fa-user-edit"></i>
+				<div class="tab"></div>
+				<span th:text="'Last updated on '+ ${report.lastUpdatedAt}"></span>
+			</div>
+		</div>
+		<br><br>
+		<div>
+			<div class= "alignleft">
+				<input type="checkbox" th:checked="${report.isApproved}" id="isApproved" disabled="disabled">
+				<label for="isApproved">&emsp; Approved by Manager</label>
+			</div>
+			
+			<div class= "alignright" th:if= "${report.isApproved}">
+				<i class="fas fa-thumbs-up"></i>
+				<div class="tab"></div>
+				<span th:text="'Approved by manager on '+ ${report.approveAt}"></span>
+			</div>
+		</div>
+		<br> <br>
+		<div>
+			<input type="checkbox" th:checked="${report.isDraft}" id="isDraft" disabled="disabled">
+			<label for="isDraft">&emsp; Draft</label>
+		</div>
+		<br> 
+		<div class= "blank2x"></div>
+		
+		<div class="card" style="margin-bottom: 30px">
+			<div class="card-header text-white bg-info">
+				<h4 style="font-weight: bold">What I did</h4>
+			</div>
+			<div  class="card-body">
+				<pre class= "report-card-pre" th:text="${report.acture}"></pre>
+			</div>
+		</div>
+		
+		<div class="card" style="margin-bottom: 30px">
+			<div class="card-header text-white bg-warning">
+				<h4 style="font-weight: bold">My issues</h4>
+			</div>
+			<div  class="card-body">
+				<pre th:if= "${report.issue}" class= "report-card-pre" th:text="${report.issue}"></pre>
+				<h5 th:unless="${report.issue}" th:text="${reportNoIssue}"></h5>
+			</div>
+		</div>
+		
+		<div class="card" style="margin-bottom: 30px">
+			<div class="card-header text-white bg-secondary">
+				<h4 style="font-weight: bold">My plans for the next day</h4>
+			</div>
+			<div  class="card-body">
+				<pre th:if= "${report.plan}" class= "report-card-pre" th:text="${report.plan}"></pre>
+				<h5 th:unless="${report.plan}" th:text="${reportNoPlan}"></h5>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div style="text-align: center;">
+		<a href="#" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
+		<a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i>Delete Report</a> <div class="tab"></div>
+	</div>
+</div>
+</html>
