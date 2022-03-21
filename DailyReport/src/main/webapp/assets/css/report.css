@@ -19,3 +19,24 @@
 .report-card pre, input, label, a {
 	margin-bottom: 15px !important;
 }
+
+.report-error{
+	font-size: 15px; 
+	font-weight: bold; 
+	color: red; 
+	margin: 15px;
+	text-align: center;
+}
+
+.report-content{
+	font-size: 15px !important;
+	margin: 20px;
+}
+
+.report-card-pre{
+	font-family: inherit !important; 
+	font-size: 15px !important;
+}
+/* .report-date{
+	
+} */
