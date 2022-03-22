@@ -2,11 +2,14 @@ package app.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Report{
 	private Integer id; 
 	private Integer user_id; 
-	private Integer isDraft; 
-	private Integer isDeleted; 
+	private boolean isDraft; 
+	private Integer isDeleted;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt; 
 	private Date approveAt; 
 	private Integer isApproved; 
@@ -14,6 +17,12 @@ public class Report{
 	private String acture; 
 	private String plan; 
 	private String issue;
+	
+	public Report(){
+		isDraft = false; 
+		isDeleted = 0; 
+		isApproved = 0; 
+	}
 	
 	public Integer getId() {
 		return id;
@@ -31,11 +40,11 @@ public class Report{
 		this.user_id = user_id;
 	}
 	
-	public Integer getIsDraft() {
+	public boolean getIsDraft() {
 		return isDraft;
 	}
 	
-	public void setIsDraft(Integer isDraft) {
+	public void setIsDraft(boolean isDraft) {
 		this.isDraft = isDraft;
 	}
 	
