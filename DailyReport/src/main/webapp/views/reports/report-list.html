@@ -16,7 +16,7 @@
 	
 	<div class="no-report" th:if="${reports.empty}">
 		<p th:text="${noReportAlert}"></p>
-		<a href="#" class= "btn btn-success">Create a new report</a>
+		<a th:href="@{'/reports/new'}" class= "btn btn-success">Create a new report</a>
 	</div>
 	
 	<div class= "blank50"></div>
@@ -37,7 +37,7 @@
 				<pre class="card-text" th:text="${report.acture}"></pre>
 				<input type="checkbox" th:checked="${report.isApproved}" id="isApproved" readonly="readonly" disabled="disabled">
 				<label for="isApproved">Approved by Manager</label><br>
-				<a th:href="@{'/report/'+${report.id}}" class="btn btn-primary"><i class="fas fa-info"></i>See Detail</a> <div class="tab"></div>
+				<a th:href="@{'/reports/'+${report.id}}" class="btn btn-primary"><i class="fas fa-info"></i>See Detail</a> <div class="tab"></div>
 				<a href="#" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
 				<a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i>Delete Report</a> <div class="tab"></div>
 			</div>

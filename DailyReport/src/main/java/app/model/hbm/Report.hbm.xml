@@ -9,7 +9,7 @@
 		<property name="user_id" type="int">
 			<column name="user_id" />
 		</property>
-		<property name="isDraft" type="int">
+		<property name="isDraft" type="boolean">
 			<column name="isDraft" />
 		</property>
 		<property name="isDeleted" type="int">

@@ -29,5 +29,4 @@
 		<property name="basename" value="classpath:messages" />
 		<property name="fallbackToSystemLocale" value="false" />
 	</bean>
-
 </beans>

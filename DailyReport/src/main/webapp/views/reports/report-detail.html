@@ -65,8 +65,8 @@
 				<h4 style="font-weight: bold">My issues</h4>
 			</div>
 			<div  class="card-body">
-				<pre th:if= "${report.issue}" class= "report-card-pre" th:text="${report.issue}"></pre>
-				<h5 th:unless="${report.issue}" th:text="${reportNoIssue}"></h5>
+				<pre th:if= "${report.issue != null && !report.issue.isEmpty() }" class= "report-card-pre" th:text="${report.issue }"></pre>
+				<h5 th:unless="${report.issue != null && !report.issue.isEmpty()}" th:text="${reportNoIssue}"></h5>
 			</div>
 		</div>
 		
@@ -75,8 +75,8 @@
 				<h4 style="font-weight: bold">My plans for the next day</h4>
 			</div>
 			<div  class="card-body">
-				<pre th:if= "${report.plan}" class= "report-card-pre" th:text="${report.plan}"></pre>
-				<h5 th:unless="${report.plan}" th:text="${reportNoPlan}"></h5>
+				<pre th:if= "${report.plan != null && !report.plan.isEmpty() }" class= "report-card-pre" th:text="${report.plan}"></pre>
+				<h5 th:unless="${report.plan != null && !report.plan.isEmpty()}" th:text="${reportNoPlan}"></h5>
 				
 			</div>
 		</div>
