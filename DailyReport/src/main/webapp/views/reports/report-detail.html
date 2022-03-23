@@ -83,7 +83,7 @@
 	</div>
 	
 	<div style="text-align: center;">
-		<a href="#" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
+		<a th:href="@{'/reports/'+${report.id} + '/update'}" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
 		<a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i>Delete Report</a> <div class="tab"></div>
 	</div>
 </div>

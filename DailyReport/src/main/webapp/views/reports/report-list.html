@@ -4,7 +4,7 @@
 	layout:decorate="views/layout/base-layout">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>My Reports</title>
+	<title th:text="${title}"></title>
 	<link rel="stylesheet" th:href="@{/assets/css/report.css}" />
 	<link rel="stylesheet" th:href="@{/assets/css/common.css}" />
 	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
@@ -12,11 +12,15 @@
 	
 </head>
 <div layout:fragment="body" class="container">
-	<h1 class= "title">My Reports</h1>
+	<h1 class= "title" th:text="${title}"></h1>
 	
-	<div class="no-report" th:if="${reports.empty}">
+	<div class="no-report" th:if="${reports.empty && draft == false}">
 		<p th:text="${noReportAlert}"></p>
 		<a th:href="@{'/reports/new'}" class= "btn btn-success">Create a new report</a>
+	</div>
+	
+	<div class="no-report" th:if="${reports.empty && draft == true}">
+		<p th:text="${noDraft}"></p>
 	</div>
 	
 	<div class= "blank50"></div>
@@ -37,8 +41,11 @@
 				<pre class="card-text" th:text="${report.acture}"></pre>
 				<input type="checkbox" th:checked="${report.isApproved}" id="isApproved" readonly="readonly" disabled="disabled">
 				<label for="isApproved">Approved by Manager</label><br>
+				<form th:if="${draft}" th:action="@{'/reports/' + ${report.id} + '/undraft'}" method="post">
+					<input type="submit" value=" Make this report Official" class="btn btn-success" />
+				</form>
 				<a th:href="@{'/reports/'+${report.id}}" class="btn btn-primary"><i class="fas fa-info"></i>See Detail</a> <div class="tab"></div>
-				<a href="#" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
+				<a th:href="@{'/reports/'+${report.id} + '/update'}" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
 				<a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i>Delete Report</a> <div class="tab"></div>
 			</div>
 		</div>

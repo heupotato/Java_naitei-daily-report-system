@@ -38,6 +38,24 @@ public class ReportController extends BaseController{
 		
 		model.addObject("noReportAlert", messageSource.getMessage("report.noreport", null, Locale.US)); 
 		model.addObject("reports", reportService.loadReports(username)); 
+		model.addObject("title", messageSource.getMessage("report.title.list", null, Locale.US)); 
+		model.addObject("draft", false); 
+		return model; 
+	}
+	
+	@RequestMapping(value = "/reports/drafts")
+	public ModelAndView showListDrafts(HttpSession session) {
+		logger.info("Drafts Page"); 
+		String url = checkAuth("views/reports/report-list");
+		ModelAndView model = new ModelAndView(url);
+		if (url.contains("redirect")) return model;
+		String username = session.getAttribute("currentUser").toString(); 
+		model.addObject("currentUser", session.getAttribute("currentUser"));
+		
+		model.addObject("noDraft", messageSource.getMessage("report.nodraft", null, Locale.US)); 
+		model.addObject("title", messageSource.getMessage("report.title.draft", null, Locale.US)); 
+		model.addObject("reports", reportService.loadDrafts(username)); 
+		model.addObject("draft", true); 
 		return model; 
 	}
 	
@@ -76,10 +94,30 @@ public class ReportController extends BaseController{
 		
 		model.addObject("currentUser", session.getAttribute("currentUser")); 
 		model.addObject("report", report); 
+		model.addObject("title", messageSource.getMessage("report.title.new", null, Locale.US)); 
 		return model; 
 	}
 	
-	@RequestMapping(value = "/reports/save", method = RequestMethod.POST)
+	@RequestMapping(value = "reports/{id}/update")
+	public ModelAndView updateReport(@PathVariable("id") int id, HttpSession session) {
+		logger.info("Update report"); 
+		String url = checkAuth("views/reports/new-report");
+		ModelAndView model = new ModelAndView(url);
+		if (url.contains("redirect")) return model;
+		Report report = reportService.findById(id);
+		
+		if (report == null) {
+			model.addObject("error", messageSource.getMessage("report.notFound", null, Locale.US));
+		}
+		else {
+			model.addObject("report", reportService.findById(id)); 
+		}
+		model.addObject("title", messageSource.getMessage("report.title.update", null, Locale.US)); 
+		model.addObject("currentUser", session.getAttribute("currentUser"));
+		return model; 
+	}
+	
+	@RequestMapping(value = "/reports", method = RequestMethod.POST)
 	public String saveOrUpdate(@Valid @ModelAttribute Report report, BindingResult bindingReport,
 			final RedirectAttributes redirectAttributes, Model model, HttpSession session) {
 		logger.info("POST - Save report");
@@ -103,5 +141,18 @@ public class ReportController extends BaseController{
 		}
 		
 		return "redirect:/reports/"+ newReport.getId();
+	}
+	
+	@RequestMapping(value = "/reports/{id}/undraft", method = RequestMethod.POST)
+	public ModelAndView undraftReport(@PathVariable("id") int id) {
+		logger.info("Undraft report"); 
+		String url = checkAuth("redirect:/reports/" + id);
+		ModelAndView model = new ModelAndView(url);
+		if (url.contains("login")) return model;
+		Report report = reportService.findById(id);
+		report.setIsDraft(false); 
+		
+		reportService.saveOrUpdate(report);	
+		return model; 
 	}
 }

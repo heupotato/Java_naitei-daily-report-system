@@ -50,5 +50,14 @@ public class ReportServiceImpl extends BaseServiceImpl implements ReportService{
 		}
 	} 
 	
+	@Override
+	public List<Report> loadDrafts(String username) {
+		try {
+			return getReportDAO().loadDrafts(username); 
+		} catch (Exception e) {
+			return Collections.<Report>emptyList(); 
+		}
+	} 
+	
 	
 }

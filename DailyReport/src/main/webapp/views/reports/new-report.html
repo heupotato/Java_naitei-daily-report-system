@@ -3,15 +3,15 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="views/layout/base-layout">
 <head>
-	<title>New Report</title>
+	<title th:text="${title}"></title>
 	<link rel="stylesheet" th:href="@{/assets/css/report.css}" />
 	<link rel="stylesheet" th:href="@{/assets/css/common.css}" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
 <div layout:fragment="body" class="container">
-	<h1 class= "title"> Create new report</h1>
-	<form th:action="@{/reports/save}"  th:method="post" class= "report-form">
+	<h1 class= "title" th:text="${title}"></h1>
+	<form th:action="@{/reports}"  th:method="post" class= "report-form">
 		<input type="hidden" th:field="*{report.id}" />
 		<div class="form-group">
 			<label for="createdDay">Choose 'Created Date'</label>
