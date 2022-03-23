@@ -36,4 +36,13 @@ public class ReportDAOImpl extends GenericDAO<Integer, Report> implements Report
 				
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Report> loadDrafts(String username) {
+		int user_id = userService.findByUsername(username).getId(); 
+		return getSession().createQuery("from Report where user_id = :user_id and isDeleted = 0 and isDraft = 1 order by createdAt DESC")
+				.setParameter("user_id", user_id)
+				.getResultList(); 
+	}
+	
 }
