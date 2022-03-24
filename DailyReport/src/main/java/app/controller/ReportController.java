@@ -1,8 +1,5 @@
 package app.controller;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +23,7 @@ import app.service.DateUtils;
 @Controller
 public class ReportController extends BaseController{
 	private static final Logger logger = Logger.getLogger(HomeController.class);
+	private static final int DELETE_TRUE = 1; 
 	
 	@RequestMapping(value = "/reports")
 	public ModelAndView showListReports(HttpSession session) {
@@ -67,8 +65,9 @@ public class ReportController extends BaseController{
 		if (url.contains("redirect")) return model;
 		
 		Report report = reportService.findById(id); 
-		if (report == null) {
+		if (report == null || report.getIsDeleted() != 0) {
 			model.addObject("error", messageSource.getMessage("report.notFound", null, Locale.US));
+			if (report.getIsDeleted() != 0) model.addObject("report", reportService.findById(id)); 
 		}
 		else {
 			model.addObject("report", reportService.findById(id)); 
@@ -106,8 +105,9 @@ public class ReportController extends BaseController{
 		if (url.contains("redirect")) return model;
 		Report report = reportService.findById(id);
 		
-		if (report == null) {
+		if (report == null || report.getIsDeleted() != 0) {
 			model.addObject("error", messageSource.getMessage("report.notFound", null, Locale.US));
+			if (report.getIsDeleted() != 0) model.addObject("report", reportService.findById(id)); 
 		}
 		else {
 			model.addObject("report", reportService.findById(id)); 
@@ -150,9 +150,30 @@ public class ReportController extends BaseController{
 		ModelAndView model = new ModelAndView(url);
 		if (url.contains("login")) return model;
 		Report report = reportService.findById(id);
-		report.setIsDraft(false); 
+		try {
+			report.setIsDraft(false); 
+			reportService.saveOrUpdate(report);	
+		}
+		catch (Exception e) {
+			logger.error(e); 
+		}
+		return model; 
+	}
+	
+	@RequestMapping(value = "/reports/{id}/delete", method = RequestMethod.POST)
+	public ModelAndView deleteReport(@PathVariable("id") int id) {
+		logger.info("Delete report"); 
+		String url = checkAuth("redirect:/reports/" + id);
+		ModelAndView model = new ModelAndView(url);
+		if (url.contains("login")) return model;
+		Report report = reportService.findById(id);
+		try {
+			report.setIsDeleted(DELETE_TRUE); 
+			reportService.saveOrUpdate(report);	
+		}catch (Exception e) {
+			logger.error(e);
+		}
 		
-		reportService.saveOrUpdate(report);	
 		return model; 
 	}
 }

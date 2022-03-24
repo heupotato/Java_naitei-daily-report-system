@@ -16,7 +16,7 @@
 .report-card pre{
 	font-size: 16px !important; 
 }
-.report-card pre, input, label, a {
+.report-card pre, input, label, a, button {
 	margin-bottom: 15px !important;
 }
 
@@ -44,4 +44,12 @@
 
 .form-group textarea{
 	font-size: 15px !important;
+}
+
+.modal-title{
+	font-weight: bold; 
+}
+
+.form-button-inline{
+	display: inline-block;
 }
