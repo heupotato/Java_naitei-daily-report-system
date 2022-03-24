@@ -11,7 +11,10 @@
 
 <div layout:fragment="body" class="container">
 	<h1 class= "title" th:text="${title}"></h1>
-	<form th:action="@{/reports}"  th:method="post" class= "report-form">
+	<div th:if="${error}">
+		<p class="report-error" th:text="${error}"></p>
+	</div>
+	<form th:unless="${error}" th:action="@{/reports}"  th:method="post" class= "report-form">
 		<input type="hidden" th:field="*{report.id}" />
 		<div class="form-group">
 			<label for="createdDay">Choose 'Created Date'</label>
