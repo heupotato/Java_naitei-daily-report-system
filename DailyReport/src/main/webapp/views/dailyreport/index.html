@@ -6,9 +6,18 @@ html xmlns:th="http://www.thymeleaf.org"
 	<head>
 		<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
 		<link rel="stylesheet" th:href="@{/assets/css/layout.css}" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<title>Home Page</title>
 	</head>
 	<div layout:fragment="body" class="container">
-		<h1>Home Page</h1>
+	  	<div class="w3-display-middle index-center">
+		    <h1 class="w3-jumbo w3-animate-top text-center">JAVA NAITEI - DAILY REPORT</h1>
+		    <hr class="w3-border-grey" style="margin:auto;width:40%">
+		    <p class="w3-large w3-center">Thai Thi Thu Loan
+				<br><br>
+				<a th:href="@{'/reports'}" class="btn btn-success btn-lg ">Get Started</a> 
+		    </p>
+		   
+		</div>
 	</div>
 </html>
