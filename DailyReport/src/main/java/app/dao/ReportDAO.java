@@ -8,5 +8,7 @@ public interface ReportDAO extends BaseDAO<Integer, Report> {
 	List<Report> loadReports(String username); 
 	
 	List<Report> loadDrafts(String username); 
+	
+	List<Report> loadReportsbyManager(String username, int isApproved); 
 
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import app.dao.GenericDAO;
 import app.dao.ReportDAO;
 import app.model.Report;
+import app.model.User;
 import app.service.UserService;
 
 
@@ -44,5 +45,21 @@ public class ReportDAOImpl extends GenericDAO<Integer, Report> implements Report
 				.setParameter("user_id", user_id)
 				.getResultList(); 
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Report> loadReportsbyManager(String username, int isApproved) {
+		User user = userService.findByUsername(username); 
+		int division = user.getDivision_id(); 
+		return getSession().createQuery("from Report report where report.user.division_id = :division "
+				+ "and isDeleted = 0 and isDraft = 0 and isApproved = :isApproved order by createdAt DESC")
+				.setParameter("division", division)
+				.setParameter("isApproved", isApproved)
+				.getResultList(); 
+		
+	}
+	
+	
+	
 	
 }

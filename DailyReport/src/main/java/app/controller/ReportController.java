@@ -38,6 +38,7 @@ public class ReportController extends BaseController{
 		model.addObject("reports", reportService.loadReports(username)); 
 		model.addObject("title", messageSource.getMessage("report.title.list", null, Locale.US)); 
 		model.addObject("draft", false); 
+		model.addObject("isManager", session.getAttribute("isManager")); 
 		return model; 
 	}
 	
@@ -54,6 +55,7 @@ public class ReportController extends BaseController{
 		model.addObject("title", messageSource.getMessage("report.title.draft", null, Locale.US)); 
 		model.addObject("reports", reportService.loadDrafts(username)); 
 		model.addObject("draft", true); 
+		model.addObject("isManager", session.getAttribute("isManager")); 
 		return model; 
 	}
 	
@@ -75,6 +77,7 @@ public class ReportController extends BaseController{
 			model.addObject("reportNoPlan", messageSource.getMessage("report.content.noPlan", null, Locale.US)); 
 		}
 		model.addObject("currentUser", session.getAttribute("currentUser"));
+		model.addObject("isManager", session.getAttribute("isManager")); 
 		return model; 
 	}
 	
@@ -94,6 +97,7 @@ public class ReportController extends BaseController{
 		model.addObject("currentUser", session.getAttribute("currentUser")); 
 		model.addObject("report", report); 
 		model.addObject("title", messageSource.getMessage("report.title.new", null, Locale.US)); 
+		model.addObject("isManager", session.getAttribute("isManager")); 
 		return model; 
 	}
 	
@@ -114,6 +118,7 @@ public class ReportController extends BaseController{
 		}
 		model.addObject("title", messageSource.getMessage("report.title.update", null, Locale.US)); 
 		model.addObject("currentUser", session.getAttribute("currentUser"));
+		model.addObject("isManager", session.getAttribute("isManager")); 
 		return model; 
 	}
 	
@@ -129,7 +134,7 @@ public class ReportController extends BaseController{
 		
 		report.setLastUpdatedAt(DateUtils.getToday());  
 		User user = userService.findByUsername(session.getAttribute("currentUser").toString()); 
-		report.setUser_id(user.getId()); 
+		report.setUser(user); 
 		
 		Report newReport = reportService.saveOrUpdate(report);	
 		if (newReport == null) {

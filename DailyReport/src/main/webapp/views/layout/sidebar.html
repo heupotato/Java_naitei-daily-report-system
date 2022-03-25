@@ -8,6 +8,8 @@
 			<ul class="sidebar-nav">
 				<li><a th:href="@{'/reports/'}">My Reports</a></li>
 				<li><a th:href="@{'/reports/drafts'}">My Drafts</a></li>
+				<li><a th:if="${isManager}" th:href="@{'/admin/reports/approved'}">Approved Reports</a></li>
+				<li><a th:if="${isManager}" th:href="@{'/admin/reports/pending'}">Pending Reports</a></li>
 				<li><a th:href="@{'/reports/new'}">New Report</a></li>
 			</ul>
 	</nav>

@@ -8,21 +8,14 @@
 	<link rel="stylesheet" th:href="@{/assets/css/report.css}" />
 	<link rel="stylesheet" th:href="@{/assets/css/common.css}" />
 	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />	
 </head>
 <div layout:fragment="body" class="container">
 	<h1 class= "title" th:text="${title}"></h1>
 	
-	<div class="no-report" th:if="${reports.empty && draft == false}">
+	<div class="no-report" th:if="${reports.empty}">
 		<p th:text="${noReportAlert}"></p>
-		<a th:href="@{'/reports/new'}" class= "btn btn-success">Create a new report</a>
 	</div>
-	
-	<div class="no-report" th:if="${reports.empty && draft == true}">
-		<p th:text="${noDraft}"></p>
-	</div>
-	
 	<div class= "blank50"></div>
 	
 	
@@ -33,9 +26,15 @@
 				<div class="tab"></div>
 				<span th:text="${report.createdAt}"></span>
 				<div class="tab4x"></div>
+				
 				<i class="fas fa-user-edit"></i>
 				<div class="tab"></div>
 				<span th:text="${report.lastUpdatedAt}"></span>
+				<div class="tab4x"></div>
+				
+				<i class="fa-solid fa-user-pen"></i>
+				<div class="tab"></div>
+				<span th:text="'Author: ' + ${report.user.fullname} + ' - ' +  ${report.user.username}"></span>
 			</div>
 			<div class="card-body report-card">
 				<pre class="card-text" th:text="${report.acture}"></pre>
@@ -45,17 +44,14 @@
 					<input type="submit" value=" Make this report Official" class="btn btn-success" />
 				</form>
 				<a th:href="@{'/reports/'+${report.id}}" class="btn btn-primary"><i class="fas fa-info"></i>See Detail</a> <div class="tab"></div>
-				<a th:href="@{'/reports/'+${report.id} + '/update'}" class="btn btn-warning"><i class="far fa-edit"></i> Update Report</a> <div class="tab"></div>
-				<button class="btn btn-danger" data-toggle="modal" th:attr="data-target='#modal-delete'+${report.id}"  th:disabled="${report.isApproved}">
-					<i class="far fa-trash-alt"></i>Delete Report
-				</button> 
+				<button th:if="${pending}" class="btn btn-success" data-toggle="modal" th:attr="data-target='#modal-approved'+${report.id}" ><i class="fa-solid fa-circle-check"></i>Approve Report</button> 
 				<!-- Modal -->
-				<div class="modal fade" th:id="modal-delete+${report.id}"role="dialog">
+				<div class="modal fade" th:id="modal-approved+${report.id}"role="dialog">
 					<div class="modal-dialog modal-sm">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Delete this report</h4>
+								<h4 class="modal-title">Approve this report</h4>
 							</div>
 							<div class="modal-body">
 								<p>Are you sure?</p>
@@ -63,7 +59,7 @@
 							<div class="modal-footer">
 							 	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							 	<form th:action="@{'/reports/' + ${report.id} + '/delete'}" method="post" class= "form-button-inline">
-									<input type="submit" value="Delete" class="btn btn-danger" />
+									<input type="submit" value="Approve" class="btn btn-success" />
 								</form>
 							</div>
 						</div>
