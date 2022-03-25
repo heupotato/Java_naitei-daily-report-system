@@ -57,7 +57,16 @@ public class ReportServiceImpl extends BaseServiceImpl implements ReportService{
 		} catch (Exception e) {
 			return Collections.<Report>emptyList(); 
 		}
-	} 
+	}
+
+	@Override
+	public List<Report> loadReportsbyManager(String username, int isApproved) {
+		try {
+			return getReportDAO().loadReportsbyManager(username, isApproved); 
+		} catch (Exception e) {
+			return Collections.<Report>emptyList(); 
+		}
+	}
 	
 	
 }

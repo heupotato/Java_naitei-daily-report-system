@@ -23,6 +23,8 @@ public class HomeController extends BaseController{
 		ModelAndView model = new ModelAndView(url);
 		if (url.contains("redirect")) return model;
 		model.addObject("currentUser", session.getAttribute("currentUser"));
+		model.addObject("isManager", session.getAttribute("isManager")); 
+		logger.info(session.getAttribute("isManager")); 
 		return model;
 	}
 	
